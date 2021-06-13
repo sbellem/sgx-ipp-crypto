@@ -30,5 +30,5 @@ The built-out static library `libippcp.a` and header files will be copied into t
 place. Remember to `make clean` before switching the build.
 
 For IPP crypto reproducible build, please follow the instructions in
-[reproducibility README.md](https://github.com/sbellem/sgx-ipp-crypto/linux/reproducibility/README.md)
+[reproducibility README.md](https://github.com/intel/linux-sgx/blob/master/linux/reproducibility/README.md)
 to reproduce the prebuilt IPP crypto.
