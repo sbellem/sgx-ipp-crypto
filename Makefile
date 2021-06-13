@@ -29,7 +29,7 @@
 #
 #
 
-include ../../buildenv.mk
+include ./buildenv.mk
 
 DIR = $(CURDIR)
 
@@ -52,10 +52,10 @@ IPP_CONFIG += -DCMAKE_CXX_FLAGS="$(ENC_CXXFLAGS)"
 SUB_DIR = no_mitigation
 ifeq ($(MITIGATION-CVE-2020-0551), LOAD)
 	SUB_DIR = cve_2020_0551_load
-	PRE_CONFIG= ASM_NASM="python $(DIR)/../../build-scripts/sgx-asm-pp.py --assembler=nasm --MITIGATION-CVE-2020-0551=LOAD"
+	PRE_CONFIG= ASM_NASM="python $(DIR)/sgx-asm-pp.py --assembler=nasm --MITIGATION-CVE-2020-0551=LOAD"
 else ifeq ($(MITIGATION-CVE-2020-0551), CF)
 	SUB_DIR = cve_2020_0551_cf
-	PRE_CONFIG= ASM_NASM="python $(DIR)/../../build-scripts/sgx-asm-pp.py --assembler=nasm --MITIGATION-CVE-2020-0551=CF"
+	PRE_CONFIG= ASM_NASM="python $(DIR)/sgx-asm-pp.py --assembler=nasm --MITIGATION-CVE-2020-0551=CF"
 endif
 OUT_DIR = lib/linux/$(ARCH)/$(SUB_DIR)/
 
