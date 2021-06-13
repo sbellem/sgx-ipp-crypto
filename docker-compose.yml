@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+
+  ipp-nomitigation:
+    image: ippcrypto-nomitigation:nix
+    build:
+      context: .
+      target: build
+      dockerfile: Dockerfile
+      args:
+        nix_derivation: ipp-nomitigation.nix
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./ipp-nomitigation.nix:/usr/src/ipp-nomitigation.nix
+
+  ipp-mitigation-all:
+    image: ipp-mitigation-all:nix
+    build:
+      context: .
+      target: build
+      dockerfile: Dockerfile
+      args:
+        nix_derivation: ipp-mitigation-all.nix
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./ipp-mitigation-all.nix:/usr/src/ipp-mitigation-all.nix
+
+  ipp-mitigation-cf:
+    image: ipp-mitigation-cf:nix
+    build:
+      context: .
+      target: build
+      dockerfile: Dockerfile
+      args:
+        nix_derivation: ipp-mitigation-cf.nix
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./ipp-mitigation-cf.nix:/usr/src/ipp-mitigation-cf.nix
+
+  ipp-mitigation-load:
+    image: ipp-mitigation-load:nix
+    build:
+      context: .
+      target: build
+      dockerfile: Dockerfile
+      args:
+        nix_derivation: ipp-mitigation-load.nix
+    volumes:
+      - ./nix:/usr/src/nix
+      - ./ipp-mitigation-load.nix:/usr/src/ipp-mitigation-load.nix

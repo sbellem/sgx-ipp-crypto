@@ -1,0 +1,17 @@
+dist: bionic
+
+language: cpp
+
+services:
+  - docker
+
+jobs:
+  include:
+    - name: ipp-crypto library with no mitigation
+      script: .ci/build.sh ipp-nomitigation.nix
+    - name: ipp-crypto library with mitigation LOAD
+      script: .ci/build.sh ipp-mitigation-load.nix
+    - name: ipp-crypto library with mitigation CF
+      script: .ci/build.sh ipp-mitigation-cf.nix
+    - name: ipp-crypto library with all mitigation
+      script: .ci/build.sh ipp-mitigation-all.nix
