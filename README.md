@@ -1,3 +1,27 @@
+---
+
+[**HERE BE DRAGONS**](https://en.wikipedia.org/wiki/Here_be_dragons)
+
+**ONLY meant for PROTOTYPING & EXPERIMENTAL purposes!**
+
+**NOT FOR PRODUCTION, NOT FOR BETA, NOT FOR ALPHA, ONLY for DEVELOPMENT!**
+
+**USE to EXPERIMENT, LEARN, and PROTOTYPE!**
+
+[**HERE BE DRAGONS**](https://en.wikipedia.org/wiki/Here_be_dragons)
+
+---
+
+This code in this repository originated from a fork of the linux-sgx repository, and
+using `git-filter-repo` only the file relevant to building IPP Crypto from source were
+kept.
+
+The goal of this repository is to better understand how to build IPP Crypto from source,
+such that it can be used to build the linux-sgx SDK from source instead of using the
+prebuilt binaries provided by Intel.
+
+---
+
 The ippcp library is built based on the Open Source project ipp-crypto:
    * https://github.com/intel/ipp-crypto/
    * branch: [ipp-crypto_2020_update3](https://github.com/intel/ipp-crypto/tree/ipp-crypto_2020_update3)
