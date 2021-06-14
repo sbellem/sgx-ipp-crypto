@@ -5,6 +5,6 @@ WORKDIR /usr/src
 COPY nix nix
 
 FROM base as build
-ARG nix_derivation=sgxsdk.nix
+ARG nix_derivation=ipp-nomitigation.nix
 COPY ${nix_derivation} ${nix_derivation}
 RUN nix-build --quiet ${nix_derivation}

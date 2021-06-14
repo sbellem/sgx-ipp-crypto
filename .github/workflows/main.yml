@@ -26,14 +26,14 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build and push
+      - name: Build and push ipp-crypto without mitigations
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/sgx-ipp-crypto:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/sgx-ipp-crypto:nomitigation
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
