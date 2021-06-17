@@ -2,7 +2,7 @@
 with pkgs;
 
 stdenvNoCC.mkDerivation {
-  name = "ippcrypto-mitigation-load";
+  name = "ippcrypto";
   src = fetchFromGitHub {
     owner = "sbellem";
     repo = "linux-sgx";

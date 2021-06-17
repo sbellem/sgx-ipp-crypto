@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+
+  ipp-nomitigation:
+    image: ippcrypto-nomitigation:nixalt
+    build:
+      context: .
+      dockerfile: alt.Dockerfile
+      args:
+        nix_derivation: ipp-nomitigation.nix
+        #volumes:
+        #  - ./nix:/home/src/nix
+        #  - ./ipp-nomitigation.nix:/home/src/ipp-nomitigation.nix
