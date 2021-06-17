@@ -1,0 +1,66 @@
+name: Build IPP Crypto
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build_nomitigation_cachix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository under $GITHUB_WORKSPACE
+        uses: actions/checkout@v2
+      # cachix
+      - uses: cachix/install-nix-action@v13
+      - uses: cachix/cachix-action@v10
+        with:
+          name: gluon
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix-build ipp-nomitigation.nix
+      - run: nix-shell --run "echo OK"
+
+  build_nomitigation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository under $GITHUB_WORKSPACE
+        uses: actions/checkout@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push ipp-crypto without mitigations
+        id: docker_build_nomitigation
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+          target: build
+          build-args: nix_derivation=ipp-nomitigation.nix
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/sgx-ipp-crypto:nomitigation
+
+      - name: Image digests
+        run: echo ${{ steps.docker_build_nomitigation.outputs.digest }}
