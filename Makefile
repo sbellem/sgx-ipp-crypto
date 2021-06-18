@@ -63,9 +63,9 @@ CHECK_SOURCE :=
 # For reproducibility build in docker, the code should be 
 # prepared before build. So skip the code check to avoid
 # triggering network request 
-ifneq ($(origin NIX_PATH), environment)
-CHECK_SOURCE:= ipp_source
-endif
+#ifneq ($(origin NIX_PATH), environment)
+#CHECK_SOURCE:= ipp_source
+#endif
 
 .PHONY: all build_ipp
 all: build_ipp
