@@ -6,8 +6,12 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "sbellem";
     repo = "linux-sgx";
-    rev = "68fed00c67532cf5be7df8dac5f9d13b3c25e9d8";
-    sha256 = "08a6y35s3rlvhcbd8zxqkw7d5vknb5b3mw0wa1wis6y7av5pskx2";
+    rev = "e6036d6edb4371f2acc64c50b7cb51e9dfa439a4";
+    # NOTE to get the sha256, use the following command:
+    # nix run -f '<nixpkgs>' nix-prefetch-github -c nix-prefetch-github \
+    #       --fetch-submodules --rev e6036d6edb4371f2acc64c50b7cb51e9dfa439a4 \
+    #       sbellem linux-sgx
+    sha256 = "0znallianv3lp3y62cfdgp8gacpw516qg8cjxhz8bj5lv5qghchk";
     fetchSubmodules = true;
   };
   buildInputs = [
