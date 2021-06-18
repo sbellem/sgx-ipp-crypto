@@ -10,6 +10,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  build_local_cachix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository under $GITHUB_WORKSPACE
+        uses: actions/checkout@v2
+      # cachix
+      - uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixos-21.05
+      - uses: cachix/cachix-action@v10
+        with:
+          name: gluon
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix-build ipp-local.nix
+      - run: nix-shell --run "echo OK"
+
   build_nomitigation_nix_quick:
     runs-on: ubuntu-latest
     steps:
